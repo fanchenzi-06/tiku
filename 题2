@@ -1,0 +1,36 @@
+
+
+#include<iostream>
+#include<algorithm>
+#include<cmath>
+using namespace std;
+bool cmp(int a,int b)
+	{
+		return a>b;
+	}
+
+int main(){
+	int nn,numbers=1;
+	cin>>nn;
+	int p=nn;
+	while(p/10!=0){
+		numbers++;
+		p=p/10;
+	}
+	int a[nn];
+	for(int i=0;i<nn;i++)
+	{
+		int x,y,z;
+		cin>>x>>y>>z;
+		int score=x+y+z;
+		a[i]=score*pow(10,numbers+3)+x*pow(10,numbers)+nn-i;
+		
+	}
+	
+	sort(a,a+nn,cmp);
+	for(int i=0;i<min(5,nn);i++)
+	{
+		cout<<1+nn-a[i]%(int)pow(10,numbers)<<" "<<a[i]/(int)pow(10,numbers+3)<<endl;
+	}
+	return 0;
+}
