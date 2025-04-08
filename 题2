@@ -1,14 +1,26 @@
+/*考点：思维！！将结构体变量转换为一串数字按优先级存储信息
 
+题目：在评选人数中选出前五名 先看总分 从高到低  再看语文成绩 
+	从高到低  再看学号 从小到大！
+输入形式：n+1行  第一行输入一个整数表示评选人数
+ 	第2~n+1行 表示每个人的成绩（满分100分） 学号从1~n
+	每行是三个用空格分隔开的数字 分别表示语文 数学 英语成绩
+
+思维体现：数据80 90 80 ID=5
+         加和总分为250   将总分、语文成绩、学号拼起来  2500805   
+	1.总分和语文成绩从高到低 直接存储原数据  学号从小到大  应该存储【总数-学号】
+	2.注意位数问题  由于满分一百  总分和语文成绩位数均为三  
+		由人数影响的学号数据应在程序中用变量实时存储*/
 
 #include<iostream>
 #include<algorithm>
-#include<cmath>
+#include<cmath>       //pow函数要有<cmath>头文件
 using namespace std;
 bool cmp(int a,int b)
 	{
 		return a>b;
 	}
-
+//升序排序
 int main(){
 	int nn,numbers=1;
 	cin>>nn;
@@ -17,6 +29,8 @@ int main(){
 		numbers++;
 		p=p/10;
 	}
+	//用p记录人数位数  
+	//常见的记录位数while代码模板
 	int a[nn];
 	for(int i=0;i<nn;i++)
 	{
@@ -24,13 +38,15 @@ int main(){
 		cin>>x>>y>>z;
 		int score=x+y+z;
 		a[i]=score*pow(10,numbers+3)+x*pow(10,numbers)+nn-i;
-		
+		//a[i]记录每个学号整体信息
 	}
 	
-	sort(a,a+nn,cmp);
-	for(int i=0;i<min(5,nn);i++)
+	sort(a,a+nn,cmp);   //升序考试
+	for(int i=0;i<min(5,nn);i++)   //min(5,nn)人数可能不足5个 正确输出
 	{
 		cout<<1+nn-a[i]%(int)pow(10,numbers)<<" "<<a[i]/(int)pow(10,numbers+3)<<endl;
 	}
+	//pow函数出来是小数double   int/double=>double    int/(int)double=>int
+	//%和/运算都要求数为整数
 	return 0;
 }
