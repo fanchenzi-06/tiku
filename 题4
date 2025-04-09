@@ -1,1 +1,35 @@
+/*	 输入：给出两个正整数  为包装中糖的颗数（不多于100） 
+      输出：一个正整数 表示不能表示的最大整数 （保证有解） 
+	！！数学思维与代码的结合！！ 
+	ax+by=C  实际上是不定方程的解 
+	限定条件：1.实际问题中解为正整数 
+	2（数学中）当a,b不互质 ==>a,b的最大公约数（gcd)不等于1 ==>  
+		C%gcd!=0（c无上界）==>无解 
+		因此题意C有上界  即a，b互质 
 
+	代码实现1：（数论）c=a*b-a-b 
+	代码实现2：枚举a*x+b*y的值 上界为a*b
+		将值存储在集合（元素不重复）  反向扫描*/ 
+
+#include<iostream> 
+#include<set>
+
+using namespace std;
+
+int main(){
+	int a,b;
+	cin>>a>>b;
+	set<int>ss;
+	for(int x=0;a*x<=a*b;x++){
+		for(int y=0;a*x+b*y<=a*b;y++){
+			ss.insert(ss.end(),a*x+b*y);
+		}
+	}
+	for(int i=a*b;i>=0;i--){
+		if(ss.find(i)==ss.end()){
+			cout<<i;
+			break;
+		}
+	}
+	return 0;
+}
