@@ -1,0 +1,27 @@
+/*在第五题的关键表达式中表示a[i]与a[i-1]的关系
+实际上时·数组前一个元素与后一个元素的关系
+那么本质上对first（前一个数）进行迭代更新即可不断算出新的second*/
+
+/*细节处理  总和从1开始  first也初始化成1*/
+
+#include<iostream>
+using namespace std;
+int main(){
+	long long  nn,kk,tt,p=0,delta=0,sum=1,first=1,second;
+	cin>>nn>>kk>>tt;
+	nn++;
+	for(int i=1;i<=nn;i++){
+		delta+=i;
+		delta%=kk;       
+	}
+	for(int i=1;i<tt;i++){
+	    second=(first+nn*p+delta)%kk;
+	    p+=nn;
+	    p%=kk;
+	    sum+=second;
+	    first=second;
+		 
+	}
+	
+	cout<<sum;
+}
