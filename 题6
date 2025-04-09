@@ -1,0 +1,32 @@
+/*题目：三个开发组  每组发一袋核桃
+	要求1.数量相同 2.组内能够平分  3.数量最小
+	输入形式：a，b，c三个正整数表示人数  用空格分开(a,b,c<30)
+	输出：一个正整数表示每袋核桃的数量*/
+
+//实际上求三个数的最小公倍数
+//求最小公倍数模板代码
+#include<iostream>
+#include<algorithm>
+using namespace std;
+
+int f(int m,int n){
+	int x=m,y=n;
+	int b=x%y;
+	while(b!=0){
+		x=y;
+		y=b;
+		b=x%y;
+	}
+	int p=m*n/y;
+	return p;
+}
+
+int main(){
+	int a,b,c;
+	int min1,min2; 
+	cin>>a>>b>>c;
+	min1=f(a,b);
+	min2=f(b,c);
+	int result=max(min1,min2);
+	cout<<result;
+} 
