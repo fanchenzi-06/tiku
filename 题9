@@ -1,0 +1,88 @@
+/*回型取数
+	沿矩阵的边取数  若方向上无数或者取过
+	则左转90° 一开始位于矩阵左上角 方向向下 
+	
+	输入：第一行是不超过200的正整数m，n表示矩阵的行和列
+	接下来m行每n个整数表示这个矩阵
+	
+	输出：输出只有一行 共mn个数 为输入矩阵回型取数得到的结果
+		数之间用一个空格分隔 行末不要有多余空格    */
+		
+//  考点：深度优先搜索：一条路一直走
+// 根据题意左转90°表示逆时针转  方向：↓→↑←
+
+#include<iostream>
+using namespace std;
+
+int main(){
+	int mm,nn;
+	cin>>mm>>nn;
+	int a[mm][nn];
+	bool vis[mm][nn];     //此数组用于记录元素是否访问过
+							//bool类型的数据值只有1和0  刚好表示访问与未访问（减少存储空间） 
+	for(int i=0;i<mm;i++)
+	{
+		for(int j=0;j<nn;j++)
+		{
+			cin>>a[i][j];
+			vis[i][j]=0;
+		}
+	}							//记录数据 初始化 
+	int x=0,y=0,flag=0,times=0;     //x，y标记当前位置  两个维度 
+	cout<<a[0][0];
+	vis[0][0]=1;
+	while(times<=2*mm*nn)        //times次数变量用来控制循环 
+	{
+		times++;
+		if(flag==0)            //flag为方向变量  按照题意顺序
+								//flag=0 表示向下  =1向右   =2向上  =3向左 
+		{
+			if(x+1<mm&&vis[x+1][y]==0)          //x+1<mm表示不越界  vis==0表示没被访问   
+			{									//都满足才可以取出  并且标记已访问  再将下标下移 
+				cout<<" "<<a[x+1][y];
+				vis[x+1][y]=1;
+				x++;
+			}
+			else
+				flag++;				//否则将转向 
+			
+		}
+		if(flag==1)
+		{
+			if(y+1<nn&&vis[x][y+1]==0)
+			{
+				cout<<" "<<a[x][y+1];
+				vis[x][y+1]=1;
+				y++;
+			}
+			else
+				flag++;
+			
+		}
+		if(flag==2)
+		{
+			if(x-1>=0&&vis[x-1][y]==0)
+			{
+				cout<<" "<<a[x-1][y];
+				vis[x-1][y]=1;
+				x--;
+			}
+			else
+				flag++;
+			
+		}
+		if(flag==3)
+		{
+			if(y-1>=0&&vis[x][y-1]==0)
+			{
+				cout<<" "<<a[x][y-1];
+				vis[x][y-1]=1;
+				y--;
+			}
+			else
+				flag=0;
+			
+		}
+	}
+	return 0;
+} 
