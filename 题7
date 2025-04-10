@@ -1,0 +1,32 @@
+/*题目：给出一列数{pi}={p0,p1,p2,...,pn-1}
+	1.找出{Pi}中最小的两个数设为pa，pb 并把pa，pb从{pi}中删去
+	 将他们的和加入{pi}中  这个过程费用记为pa+pb
+	2.重复步骤1 直到{pi}中剩下一个数 所有费用相加为总费用
+	
+	输入形式：第一行包含一个正整数n(n<=100) 
+			接下来是n个正整数 p0，p1，pn-1，每个数不超过1000
+	输出：总费用*/
+	
+//实际上是Huffman树的代码实现过程 
+
+#include<iostream>
+#include<algorithm>
+
+using namespace std;
+int main(){
+	int nn;
+	cin>>nn;
+	int a[nn],sum=0,add;
+	for(int i=0;i<nn;i++){
+		cin>>a[i];
+	}
+	sort(a,a+nn);        //涉及找最大最小进行排序 
+	for(int i=0;i<nn-1;i++)     //一开始nn个元素  最后只剩一个 操作nn-1次 
+	{
+		add=a[i]+a[i+1];   
+		sum+=add;
+		a[i+1]=add;      //直接将前两个数和赋到第二个位置上 
+		sort(a+i+1,a+nn);   //对第二个之后新的{pi}排序 
+	}
+	cout<<sum;
+} 
