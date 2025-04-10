@@ -1,0 +1,36 @@
+/*  题目：1~n某个全排列中有多少个连号区间
+	区间[L,R]里所有元素（即此排列的第L个到第R个元素）递增排序后
+	能得到一个长度为R-L+1的“连续”数列，那么称这个区间为连号区间。
+ 		输入：第一行：正整数n（1<=n<=50000) 表示全排列规模
+	        第二行：n个不同的数字（1<=pi<=n)  表示这n个数字的全排列
+	  输出：一个整数  表示连号区间的数目*/
+
+/*  贪心算法：区间长度=最大值-最小值+1 则为连号
+	暴力求解：两个for循环确定全部区间长度*/
+	
+#include<iostream>
+using namespace std;
+int main(){
+	int nn,sum=0; 
+	cin>>nn;
+	int a[nn];
+	for(int i=0;i<nn;i++){
+		cin>>a[i];
+	}
+	for(int i=0;i<nn;i++){
+		int max1=INT_MIN;          //在每次初始位置变化时最大最小值也要重新更新 
+		int min1=INT_MAX;
+		for(int j=i;j<nn;j++){      //j=i成立  单个字符算一个连号区间 
+			if(a[j]>max1){
+				max1=a[j];
+			}
+			if(a[j]<min1){
+				min1=a[j];
+			}
+			if(max1-min1==j-i){
+				sum++;
+			}
+		}
+	}
+	cout<<sum;
+} 
