@@ -1,0 +1,49 @@
+/*取模  给定n,m 是否存在两个不同的数x,y使得1<=x,y<=m 
+ 且n mod x=n mod y
+ 
+ 输入：包含多组独立的询问
+ 	第一行包含一个整数T表示询问的组数
+	接下来T行包含两个整数n,m用一个空格分隔一组询问
+
+输出：输出T行 每行依次对应一组询问的结果
+	如果存在 出"Yes" 不存在 输出"No"
+	
+所有测评用例：1<=T<=100000   1<=n<=1000000000 */
+
+// 暴力循环会时间超时
+//对每个数进行取余 将余数存入集合 检索是否有重复(特别是无序集合检索快) 
+
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+	int nn;
+	cin>>nn;
+	for(int e=0;e<nn;e++)
+	{
+		int n,m;
+		cin>>n>>m;
+		unordered_set<int>sett;
+		int flag=0;
+		for(int i=1;i<=m;i++)
+		{
+			int temple=n%i;
+			if(sett.find(temple)!=sett.end())
+			{
+				flag=1;
+				break;	
+			}
+			else
+			{
+				sett.insert(temple);
+			}
+		}
+		if(flag==1)
+		{
+			cout<<"Yes"<<'\n';
+		}
+		else{
+			cout<<"No"<<'\n';
+		}
+	}
+	return 0;
+}
