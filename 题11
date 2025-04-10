@@ -1,0 +1,54 @@
+/*  平面切分
+	平面上有n条直线  其中第i条直线y=Aix+Bi  计算这些直线将平面分成几个部分
+	
+	输入：第一行 一个正整数n   以下n行包含两个正整数Ai Bi
+	输出：一个整数表示答案*/
+
+/*  最开始一个直线分成两个平面
+	
+	平面数与直线交点==>直线平行（平面+1） ||直线重合(平面无变化）
+					==>相交（平面+交点数+1）（注：重合的交点只算一个）*/
+					
+#include<bits/stdc++.h>      //万能开头 几乎包括所有库 但编译会慢点 
+using namespace std;
+
+int main(){
+	int nn,res=1;       
+	cin>>nn;
+	vector<vector<int>>v;     
+	for(int i=0;i<nn;i++)
+	{
+		int a,b,num=0;
+		cin>>a>>b;
+		unordered_set<double>point;   //存放当前的这条直线与之前每条直线的交点集 
+		//set为有序集合	  unordered_set为无序集合	 无序集合提高效率&&集合元素不重复(重复交点算一个） 
+		for(int j=0;j<v.size();j++)
+		{
+			if(v[j][0]==a){            //平行否 
+				if(v[j][1]==b)			//重合否 
+				{
+					num=-1;
+					break;             //与一条重合则剩下都不用看 
+				}
+				else
+				{
+					continue;           //与一条平行 肯定不相交 直接进入下一轮循环 
+				}
+			}       //不平行则相交  找交点个数 
+			double x=static_cast<double>(b-v[j][1])/(a-v[j][0]);  //只需记录交点x坐标即可 只有斜率不存在的直线才会与两条直线交点相同 
+			//static_cast强制转换类型  优点：能自动检查  如果不能转换系统会自动报错
+			//系统会自动向前自动做类型转换=>以免精度丢失  eg.double/int中int会自动转为double												   
+			auto yes=point.find(x);
+			if(yes==point.end())        //point.find(x)==point.end() 表示集合中无此元素 
+			{							//point.end()容器末尾之后 != point.back()容器最后一个元素 
+				num++;
+				point.insert(x);
+			}
+		}
+		res+=num+1;      //res作为结果累加每次num的部分 
+		v.push_back({a,b});   //二维数组存放每次直线参数{ai，bi}   二维数组的每一个元素是一维数组 这边将{a，b}看为一个数组 
+		
+	}
+	cout<<res;
+	return 0;
+} 
