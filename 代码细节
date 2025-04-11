@@ -1,0 +1,23 @@
+一
+    char c1='C';
+1.   c1=c1+4;    //赋值运算 c1是char类型  将数字自动转化为字符    
+cout<<c1   //此时c1='G' 
+
+2.  cout<<c1+4  //输出71
+//自动类型提升 自动转为Int
+
+注意越界问题  z后面没有4个字母  
+
+
+  二
+  cout<<"c="<<fixed<<setpercision(4)<<c;  保留小数点后几位小数  带上头文件#include<iomanip>
+
+  三
+    f double
+   f-32  double
+   5*(f-32)  double  (往高精度转）
+   int -> float -> double
+   int *int =int
+   int*float=float
+   int*double=double
+   float*double=double     
