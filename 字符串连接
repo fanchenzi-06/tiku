@@ -1,0 +1,49 @@
+方法一：
+#include<iostream>
+#include<string>
+using namespace std;
+
+void connect(string x,string y){
+	string z=x+y;   //c++中可以这样直接拼接 
+	cout<<z; 		//直接在分函数输出  不返回值 
+} 
+int main(){
+	string a,b;
+	cin>>a>>b;
+	connect(a,b);    
+	return 0;
+} 
+
+方法二：
+#include<iostream>
+#include<string>
+using namespace std;
+
+string connect(string x,string y){
+	string z=x+y;    
+	return z;        //返回一个字符串 
+} 
+int main(){
+	string a,b;
+	cin>>a>>b;
+	string c=connect(a,b);  //赋值到主函数的一个字符串上 
+	cout<<c;				//在主函数上输出 
+	return 0;
+}
+
+
+方法三：
+#include<iostream>
+#include<string>
+using namespace std;
+
+void connect(string x,string y,string &z){
+	z=x+y;    //c++函数参数的传递与c#同  分为值传递和地址传递(也称引用传递) 
+}              //在此a,b为值传递  c为参数传递 
+int main(){
+	string a,b,c;
+	cin>>a>>b;
+	connect(a,b,c);
+	cout<<c;
+	return 0;
+}
