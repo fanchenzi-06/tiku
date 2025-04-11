@@ -1,0 +1,47 @@
+//字符串的输入输出处理
+
+/*输入：第一行是正整数n 最大值为100  之后是多行字符串(行数大于n)
+每一行字符串可能含有空格 字符数不超过1000
+
+要求：前n行原样输出  余下的字符串(不含有空格)以空格或回车分割
+依次按行输出 每次输出之间隔一个空行   */
+
+#include<iostream>
+
+using namespace std;
+
+int main(){
+	int nn;
+	cin>>nn;
+	string s[nn];
+	getchar();   //字符串输入的时候一定要小心回车符  否则会当成数据存储 
+	for(int i=0;i<nn;i++)
+	{
+		getline(cin,s[i]);
+
+	}
+	for(int i=0;i<nn;i++)
+	{
+		cout<<s[i]<<endl<<endl;   //每次输出之间输出一个空行  所以有两次endl 
+	}
+	string v;
+	while(getline(cin,v))   //直接完成读入字符串的操作
+							//&&放在while条件中刚好也是输出结束的条件 
+	{
+		for(int i=0;i<v.length();i++)
+		{
+			if(v[i]!=' ')  //v[i]是单个字符 用''   string(字符串) a=" " 
+			{
+				cout<<v[i];
+			}
+			else if(v[i-1]!=' ')
+			{
+				cout<<endl<<endl;
+			}	
+		}
+		cout<<endl<<endl;  //每行字符串结束后还有换行  记得得补上	
+	}
+} 
+
+//ps：蓝桥杯不在乎输入输出混淆 
+ 
