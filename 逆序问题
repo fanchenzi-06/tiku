@@ -1,0 +1,70 @@
+//数字逆序输出 空格分开
+
+//method 1
+
+
+#include<iostream>
+using namespace std;
+ 
+int main(){
+	int a[10];
+	for(int i=0;i<10;i++)
+	{
+		cin>>a[i];
+	}
+	for(int i=9;i>=0;i--)
+	{
+		cout<<a[i];
+		if(i>0)
+		{
+			cout<<" ";
+		}
+	}
+	return 0;
+}
+
+
+//method 2
+
+//使用栈（先进后出）进行逆序输出
+#include<iostream>
+#include<stack>
+
+using namespace std;
+
+int main(){
+	stack<int>s;  //名为s的栈存放Int类型的数据
+	for(int i=0;i<10;i++)
+	{
+		int a;
+		cin>>a;
+		s.push(a);
+	} 
+	while(s.empty()!=1)  //判断栈的空不为真  即栈中还有元素
+	{
+	 	cout<<s.top();  //输出现在栈中最上面的元素 
+	 	s.pop();   //取出栈最上面的元素
+		if(s.empty()!=1)
+		{
+			cout<<" ";
+		 
+		} 
+	} 
+	return 0;
+}
+
+//字符串整体求逆
+//c++中有逆序函数
+
+#include<iostream>
+#include<algorithm>
+
+using namespace std;
+
+int main(){
+	string s;
+	getline(cin,s);
+	string s_s=s;
+	reverse(s.begin(),s.end());
+	cout<<s_s<<" "<<s;
+} 
