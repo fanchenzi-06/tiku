@@ -1,0 +1,36 @@
+/*母牛的故事
+有一只母牛  它每年年初生一头小母牛  每头小母牛从第四个年头开始
+每年年初也生一头小母牛  问在第n年的时候  共有多少头母牛
+
+输入：n(0<n<55)  n=0表示输入数据结束 */
+
+#include<iostream>
+using namespace std;
+
+int main(){
+	int a=1,b1=0,b2=0,b3=0,year[55];
+	year[0]=0;
+	year[1]=1;
+	for(int i=2;i<55;i++)
+	{
+		a=a+b3;
+		year[i]=year[i-1]+a;
+		b3=b2;
+		b2=b1;
+		b1=a;
+	}
+	while(1)
+	{
+		int p;
+		cin>>p;
+		if(p!=0)
+		{
+			cout<<year[p]<<endl;
+		}
+		else
+		{
+			break;
+		}
+	}
+	return 0;
+} 
